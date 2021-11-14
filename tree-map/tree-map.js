@@ -33,5 +33,52 @@ var Tree = function(value) {
   this.children = [];
 };
 
+Tree.prototype.addChild = function(value) {
+  var newChild = new Tree(value);
+  this.children.push(newChild);
 
+  return newChild;
+}
 
+Tree.prototype.map = function(func) {
+  var mappedTree = new Tree(this.value);
+
+  var traverse = function(tree, mapTree) {
+    // find value of tree and use func on value
+    mapTree.value = func(tree.value);
+
+    // check if this has children
+    if (tree.children.length > 0) {
+      // iterate through children
+      for (var i = 0; i < tree.children.length; i++) {
+        var newMapChild = new Tree(tree.children[i].value);
+        mapTree.children.push(newMapChild);
+
+        // call recursive function on child
+        traverse(tree.children[i], mapTree.children[i]);
+      }
+    }
+  }
+
+  traverse(this, mappedTree);
+
+  return mappedTree;
+};
+
+var root1 = new Tree(1);
+var branch2 = root1.addChild(2);
+var branch3 = root1.addChild(3);
+var leaf4 = branch2.addChild(4);
+var leaf5 = branch2.addChild(5);
+var leaf6 = branch3.addChild(6);
+var leaf7 = branch3.addChild(7);
+var newTree = root1.map(function (value) {
+  return value * 2;
+})
+
+console.log(newTree.value) // 2
+console.log(newTree.children[0].value) // 4
+console.log(newTree.children[1].value) // 6
+console.log(newTree.children[0].children[1].value) // 10
+console.log(newTree.children[1].children[1].value) // 14
+console.log(root1.value) // still 1

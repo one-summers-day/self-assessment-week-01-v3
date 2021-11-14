@@ -46,8 +46,14 @@ Tree.prototype.addChild = function(value) {
 // add map method
 Tree.prototype.map = function(cb) {
   // create new Tree and add the first subTree
+  var newTree = new Tree(cb(this.value));
   // add new tree children recursively calling map on each children
+  for (var i = 0; i < this.children.length; i++) {
+    // newTree.chidren[i] will only be assigned a value once treeChildren.map(cb) finishes executing
+    newTree.children[i] = treeChildren.map(cb);
+  }
   // return the new tree
+  return newTree;
 };
 
 

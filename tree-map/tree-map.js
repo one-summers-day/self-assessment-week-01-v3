@@ -39,23 +39,19 @@ Tree.prototype.map = function(mappingFunc) {
   // generate a new tree (don't modify original tree) with root node value after mappingFunc
   var result = new Tree(mappingFunc(this.value));
   // somehow I need to iterate over original tree(this)
-  // iterate through each childNode
+  // iterate through each original childNode (recursively?)
   // transfer childNodes with mappingFunc values to result
-   // iterate over original rootnode
-   for (var key in this) {
-    // iterate over original children array
+  // iterate over original children array
     for (var i = 0; i < this.children.length; i++) {
       // apply mappingFunc to childNode value
       var child = this.children[i];
+      var newValue = mappingFunc(child.value);
       // have result children equal mappingFunc child.value
-      child.value = mappingFunc(child.value);
-    }
-   }
-
+      for (var x = 0; x < result.children.length; x++) {
+      result.children[x].value = newValue;
+      }
+     }
     return result;
-
-
-
 }
 
 // create addChild function

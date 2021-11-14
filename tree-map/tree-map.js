@@ -32,6 +32,31 @@ var Tree = function(value) {
   this.value = value;
   this.children = [];
 };
+Tree.prototype.map = function(callback) {
+  const result = new Tree(callback(this.value)); //create children and add value in it
+  const findChildren = function(branch, mapBranch, callback) {
+   //loop over
+    branch.children.forEach((el, index) => {
+      // add transform value on each children
+      mapBranch.addChild(callback(el));
+      if (el.children.length) { // if that child also has children
+        findChildren(el, mapBranch.children[index], callback); // loop over its children
+      }
+    });
+  };
+  //check if it has a children
+  if (this.children.length) { // loop over its children
+    findChildren(this, result, callback);
+  } else { // no children
+    return result; //return result
+  }
 
+};
+
+Tree.prototype.addChild = function(value) {
+  const child= new Tree(value); // create a single new tree
+  this.children.push(child);
+
+};
 
 

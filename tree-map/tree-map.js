@@ -31,7 +31,22 @@
 var Tree = function(value) {
   this.value = value;
   this.children = [];
+
 };
-
-
+Tree.prototype.addChild = function(value) {
+  var child = new Tree(value);
+  this.children.push(child);
+  return child;
+};
+Tree.prototype.map = function(cb) {
+  var newTree = new Tree(cb(this.value));
+  var addValues = function(currentTree, newTree, cb) {
+    for (var i = 0; i < currentTree.children.length; i++) {
+      addValues(currentTree.children[i],
+        newTree.addChild(cb(currentTree.children[i].value)), cb);
+    }
+  }
+  addValues(this, newTree, cb);
+  return newTree;
+};
 

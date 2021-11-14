@@ -36,8 +36,11 @@ var Tree = function(value) {
 // add method addChild for the Tree class
 Tree.prototype.addChild = function(value) {
   // create new subTree with the passed in value
+  var newSubTree = new Tree(value);
   // push new subTree to this tree instance children
+  this.children.push(newSubTree);
   // return newSubTree
+  return newSubTree;
 };
 
 // add map method

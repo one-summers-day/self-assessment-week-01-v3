@@ -33,5 +33,15 @@ var Tree = function(value) {
   this.children = [];
 };
 
+//First need to add addChild method
+
+Tree.prototype.addChild = function(value) {
+  //Instantiate new tree and set to child
+  child = new Tree();
+  //Set child.value to passed in value
+  child.value = value;
+  //Push child to existing tree children array
+  this.children.push(child);
+}
 
 

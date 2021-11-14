@@ -33,5 +33,26 @@ var Tree = function(value) {
   this.children = [];
 };
 
+Tree.prototype.addChild = function(value) {
+  // create a treenode for the child
+  var child = new Tree(value);
+  // add child into current node's children list
+  this.children.push(child);
+};
+
+// not sure what we should define
+// should we return value or should we return node
+
+Tree.prototype.map = function(node) {
+  if (!node) {
+     var newNode = new Tree();
+     newNode.value = node.map(value);
+  }
+  for (var i = 0; i < node.children.length; i++) {
+      var newChild = new Tree();
+      newChild.value = node.children[i].map(value);
+  }
+ return newNode;
+};
 
 

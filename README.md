@@ -8,7 +8,7 @@ Assessments are meant to give you and Hack Reactor staff an idea of how well you
 - Fork this repo and clone down your fork to your laptop.
 - Commit **working** code early and often (at least after every prompt). You are graded on your commit messages in addition to the code that you write.
 
-Tips: 
+Tips:
 - Use the Chrome Console [Snippets](https://developers.google.com/web/tools/chrome-devtools/javascript/snippets) feature to author, test and debug your code before committing. An approved alternate tool is [JSFiddle](https://jsfiddle.net/). You are **NOT PERMITTED** to use [repl.it](https://repl.it/) to work on or complete this assessment.
 - Do at least a little work on *every* prompt, even if you only leave comments that describe your intent. **Leaving a prompt blank is tantamount to failing a prompt. You'll get much more credit even for writing comments or pseudo-code that describe your intent**
 - You **must** submit a pull request for all assessments **on time** (guidelines for how to submit a pull request are below). Give yourself several minutes to do this at the end of the time allotted for the assessment
@@ -24,7 +24,7 @@ When submitting your work via a pull request, make sure to include a grade for e
 
 ### Grading Outline
 
-- [ ] tree-map
+- [ mostly complete] tree-map
 
 
 ### Grading Scale

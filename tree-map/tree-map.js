@@ -33,5 +33,27 @@ var Tree = function(value) {
   this.children = [];
 };
 
+Tree.prototype.addChild = function(value) {
+  let child = new Tree(value);
+  this.children.push(child);
+};
+
+Tree.prototype.map = function(func) {
+//generate new Tree object
+  let newTree = this;
+
+  //traverse tree using inner function recursion
+  let traverse = function (tree) {
+    tree.value = func(tree.value);
+    tree.children.forEach(function(element) {
+      traverse(element);
+    });
+    return tree;
+  };
+
+
+  return traverse(newTree);
+};
+
 
 

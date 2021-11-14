@@ -63,19 +63,21 @@ Tree.prototype.contains = function(target) {
 
 
 Tree.prototype.map = function(func) {
+  //     debugger;
+  //create newTree
   var newTree = new Tree()
   //if root value exists
   if (this.value) {
-    //invoke func on the value
+    //invoke func on the value and set as newTree value
     newTree.value = func(this.value)
   }
   //otherwise create a recursion function that takes in childrens and func as paramter
   let innerFunction = function(childrenArray, func) {
     //iterate through the children array
     for (var i = 0; i < childrenArray.length; i++) {
-      //if the children value exists at the iteration
-      if (childrenArray[i].value) {
-        //invoke func on each child's value
+      //if the children array length at iteration is greater than 0
+      if (childrenArray[i].children.length > 0) {
+        //invoke func on each child's value and push into newTree children array
         newTree.children.push(func(childrenArray[i].value))
       } else {
         //otherwise, use recursion that iterates through the children's children
@@ -85,6 +87,7 @@ Tree.prototype.map = function(func) {
   }
   //call the recursive function on the root's children
   innerFunction(this.children, func)
+  //return newTree
   return newTree
 }
 

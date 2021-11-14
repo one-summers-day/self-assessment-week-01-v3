@@ -33,5 +33,24 @@ var Tree = function(value) {
   this.children = [];
 };
 
+Tree.prototype.addChild = function(value) {
+  var tree = new Tree(value);
+  this.children.push(tree);
+  return tree;
+}
+
+// recursive function that will perform some operation (func) on every node in the tree
+Tree.prototype.map = function(func) {
+  var tree = new Tree()
+  tree.value = this.value
+  console.log(this.value);
+  tree.children = this.children;
+  func(tree.value);
+  for (var i = 0; i < this.children.length; i++) {
+    func(tree.children[i]);
+  }
+  return tree;
+}
+
 
 

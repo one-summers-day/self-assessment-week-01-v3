@@ -33,5 +33,36 @@ var Tree = function(value) {
   this.children = [];
 };
 
+// add method addChild for the Tree class
+  // create new subTree with the passed in value
+  // push new subTree to this tree instance children
+  // return newSubTree
 
 
+// add map method
+  // create new Tree and add the first subTree
+  // add new tree children recursively calling map on each children
+  // return the new tree
+
+
+
+
+// tests
+var root1 = new Tree(1);
+  var branch2 = root1.addChild(2);
+  var branch3 = root1.addChild(3);
+  var leaf4 = branch2.addChild(4);
+  var leaf5 = branch2.addChild(5);
+  var leaf6 = branch3.addChild(6);
+  var leaf7 = branch3.addChild(7);
+
+var newTree = root1.map(function (value) {
+  return value * 2;
+});
+
+newTree.value // 2
+newTree.children[0].value // 4
+newTree.children[1].value // 6
+newTree.children[0].children[1].value // 10
+newTree.children[1].children[1].value // 14
+root1.value // still 1

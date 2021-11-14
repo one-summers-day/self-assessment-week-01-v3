@@ -28,10 +28,26 @@
   *  root1.value // still 1
   */
 
-var Tree = function(value) {
+ var Tree = function(value) {
   this.value = value;
   this.children = [];
 };
 
+Tree.prototype.addChild = function (value) {
+  var treeGenerated = new Tree(value);
+  this.children.push(treeGenerated);
+  return treeGenerated;
+}
 
-
+Tree.prototype.map = function (func) {
+  // base case says that if the array is 0 stop the recursive call
+  if (this.children.length === 0) {
+    return;
+  }
+  // we want to iterate through each children and then call the func passed in each one
+    // we will pass value through func and set that return value as the new value
+    // at the end of everything this should return a tree without modifying the new one
+  for (var x = 0; x < this.children.length; x++) {
+    console.log(this.children[x])
+  }
+}

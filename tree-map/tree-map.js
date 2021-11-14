@@ -32,6 +32,17 @@ var Tree = function(value) {
   this.value = value;
   this.children = [];
 };
+// pseudoclassical uses .prototype & new
+
+// needs to add children put into tree function
+  //take in value
+  //push into children array
+
+//function for map
+  //takes in function that takes in value
+  //creates a new tree that has its input vals modified via function
+  // use funct similar to contains?
+
 
 
 

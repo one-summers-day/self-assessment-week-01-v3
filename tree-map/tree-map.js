@@ -43,7 +43,6 @@ var Tree = function(value) {
 
 Tree.prototype.addChild = function (value) {
   const newBranch = new Tree(value);
-  // console.log(this);
   this.children.push(newBranch);
   return newBranch;
 }
@@ -60,15 +59,15 @@ Tree.prototype.map = function (func, node = this) {
   return this;
 }
 
-var root1 = new Tree(1);
-var branch2 = root1.addChild(2);
-var branch3 = root1.addChild(3);
-var leaf4 = branch2.addChild(4);
-var leaf5 = branch2.addChild(5);
-var leaf6 = branch3.addChild(6);
-var leaf7 = branch3.addChild(7);
-var newTree = root1.map(function (value) {
-  return value * 2;
-});
-console.log(root1);
-console.log(newTree);
+// var root1 = new Tree(1);
+// var branch2 = root1.addChild(2);
+// var branch3 = root1.addChild(3);
+// var leaf4 = branch2.addChild(4);
+// var leaf5 = branch2.addChild(5);
+// var leaf6 = branch3.addChild(6);
+// var leaf7 = branch3.addChild(7);
+// var newTree = root1.map(function (value) {
+//   return value * 2;
+// });
+// console.log(root1);
+// console.log(newTree);

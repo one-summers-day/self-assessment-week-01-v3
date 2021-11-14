@@ -67,21 +67,22 @@ Tree.prototype.addChild = function(value) {
 Tree.prototype.map = function(cb) {
   //instantiate new Tree
   var newTree = new Tree();
+  //treeRecurse(cb, this)
   //perform cb function on current node and set to newTree val
   newTree.value = cb(this.value);
-  //recurse through old tree children
+  //recurse func
   const treeRecurse = function(cb, node) {
-    let value = cb(node.value);
-    newTree.addChild(value);
-    for (let child in node.children) {
+    //Add new child to newTree
+    newTree.addChild(cb(node.value));
+    node.children.forEach(() => {
       treeRecurse(cb, child);
-    }
+    })
   }
   //Initiate recursion by going through each of this.node's children
   //There's definitely a more elegant way of doing this
-  for (let i = 0; i < this.children.length; i++) {
+  this.children.forEach(()=> {
     treeRecurse(cb, this.children[i]);
-  }
+  })
   return newTree;
 }
 

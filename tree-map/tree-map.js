@@ -33,5 +33,35 @@ var Tree = function(value) {
   this.children = [];
 };
 
+//First need to add addChild method
+Tree.prototype.addChild = function(value) {
+  //Instantiate new tree and set to child
+  child = new Tree();
+  //Set child.value to passed in value
+  child.value = value;
+  //Push child to existing tree children array
+  this.children.push(child);
+}
 
+Tree.prototype.map = function(cb) {
+  //instantiate new Tree
+  var newTree = new Tree();
+  //treeRecurse(cb, this)
+  //perform cb function on current node and set to newTree val
+  newTree.value = cb(this.value);
+  //recurse func
+  const treeRecurse = function(cb, node) {
+    //Add new child to newTree
+    newTree.addChild(cb(node.value));
+    node.children.forEach(() => {
+      treeRecurse(cb, child);
+    })
+  }
+  //Initiate recursion by going through each of this.node's children
+  //There's definitely a more elegant way of doing this
+  this.children.forEach((child)=> {
+    treeRecurse(cb, child);
+  })
+  return newTree;
+}
 

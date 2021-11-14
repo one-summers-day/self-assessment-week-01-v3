@@ -33,30 +33,31 @@
   this.children = [];
 };
 
-Tree.addChild = function(value) {
+Tree.prototype.addChild = function(value) {
   let newTree = new Tree(value);
   this.children.push(newTree);
+  return newTree
 }
 
-Tree.map = function(func) {
-  let newTree = new Tree();
+Tree.prototype.map = function(func) {
+  // copy tree
+  let newTree = {...this};
 
-  let traverseTree = function(oldTree) {
-    // set current tree's value
-    newTree.value = func(oldTree.value);
+  let traverseTree = function(tree) {
+    // run current tree's value through func
+    tree.value = func(tree.value);
 
-    // create children in new tree for every child in old tree
-    oldTree.children.forEach(child) {
-      newTree.addChild(traverseTree(child));
-    }
+    // run each child's value through func recursively
+    tree.children.forEach(function(child) {
+      traverseTree(child);
+    });
   }
+  traverseTree(newTree);
 
-  traverseTree(this);
   return newTree;
 }
 
 // Test Cases
-
 var root1 = new Tree(1);
 var branch2 = root1.addChild(2);
 var branch3 = root1.addChild(3);
@@ -69,9 +70,9 @@ var newTree = root1.map(function (value) {
   return value * 2;
 })
 
-newTree.value // 2
-newTree.children[0].value // 4
-newTree.children[1].value // 6
-newTree.children[0].children[1].value // 10
-newTree.children[1].children[1].value // 14
-root1.value // still 1
+console.log(newTree.value); // 2
+console.log(newTree.children[0].value); // 4
+console.log(newTree.children[1].value); // 6
+console.log(newTree.children[0].children[1].value); // 10
+console.log(newTree.children[1].children[1].value); // 14
+console.log(root1.value); // still 1

@@ -20,18 +20,43 @@
   *   var newTree = root1.map(function (value) {
   *     return value * 2;
   *   })
-  *  newTree.value // 2
-  *  newTree.children[0].value // 4
-  *  newTree.children[1].value // 6
-  *  newTree.children[0].children[1].value // 10
-  *  newTree.children[1].children[1].value // 14
-  *  root1.value // still 1
-  */
+  // *  newTree.value // 2
+  // *  newTree.children[0].value // 4
+  // *  newTree.children[1].value // 6
+  // *  newTree.children[0].children[1].value // 10
+  // *  newTree.children[1].children[1].value // 14
+  // *  root1.value // still 1
+  // */
 
-var Tree = function(value) {
-  this.value = value;
-  this.children = [];
-};
+  var Tree = function(value) {
+    this.value = value;
+    this.children = [];
+  };
+
+  Tree.prototype.addChild = function(value) {
+    var child = new Tree(value);
+    this.children.push(child);
+    return child;
+  }
+
+  Tree.prototype.map = function(func) {
+
+
+    var mapped = new Tree(func(this.value));
+    // for (var i = 0; i <= this.children.length; i++) {
+    //   // var mappedChild = this.children[i].map(func);
+
+    // }
+    this.children.forEach(function(child) {
+      mapped.children.push(child.map(func));
+    });
+    return mapped
+  }
+
+
+
+
+
 
 
 

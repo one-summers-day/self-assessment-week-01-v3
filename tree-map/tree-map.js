@@ -35,7 +35,7 @@ var Tree = function(value) {
 };
 
 Tree.prototype.addChild = function(value) {
-  //store a new instance of Tree object using the new keyword into a childArray.
+  //store a new instance of Tree object into a childArray.
   //then pushed into the children array in tree node
   //return the value that ws added
   var childArray = this.children;
@@ -43,16 +43,20 @@ Tree.prototype.addChild = function(value) {
   return new Tree(value);
 };
 
-Tree.prototype.map = function(callback)  {
-  //accepts a callback as an argument that will iterate over children Array and add new node,
+Tree.prototype.map = function(func)  {
+  //accepts a func as an argument that will iterate over children Array and add new node,
   //will stop when a node no longer has any child nodes.
+  var newTreeObj = new Tree();
+  //set the value of a new tree by calling callback func on this value
+  newTreeObj.value = func(this.value);
   var childArray = this.children;
   if (childArray.length > 0) {
     for (var i = 0; i < childArray.length; i ++) {
-      //somehow returns a callback function
+      //somehow returns a callback func function
     }
   }
   //somehow returns tree with new values
+  return newTreeObj; //?
 };
 
 

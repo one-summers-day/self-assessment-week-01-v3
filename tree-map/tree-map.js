@@ -28,10 +28,32 @@
   *  root1.value // still 1
   */
 
-var Tree = function(value) {
+ var Tree = function(value) {
   this.value = value;
   this.children = [];
 };
 
+Tree.prototype.addChild = function(value) {
+  let newTree = new Tree(value);
+  this.children.push(newTree);
+  return newTree
+}
 
+Tree.prototype.map = function(func) {
+  // copy tree to not modify original
+  let newTree = {...this};
 
+  let traverseTree = function(tree) {
+    // update tree's value by passing it through func
+    tree.value = func(tree.value);
+
+    // run each child's value through func recursively
+    tree.children.forEach(function(child) {
+      traverseTree(child);
+    });
+  }
+  // kickoff map by passing in top level parent
+  traverseTree(newTree);
+
+  return newTree;
+}

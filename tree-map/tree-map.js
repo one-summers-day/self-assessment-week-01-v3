@@ -33,5 +33,38 @@ var Tree = function(value) {
   this.children = [];
 };
 
+// input is a function that iterate over root and child nodes and changes their values
+// output: object: tree with same rootNode/childNodes (values are doubled)
+Tree.prototype.map = function(mappingFunc) {
+  // generate a new tree (don't modify original tree) with root node value after mappingFunc
+  var result = new Tree(mappingFunc(this.value));
+  // somehow I need to iterate over original tree(this)
+  // iterate through each childNode
+  // transfer childNodes with mappingFunc values to result
+   // iterate over original rootnode
+   for (var key in this) {
+    // iterate over original children array
+    for (var i = 0; i < this.children.length; i++) {
+      // apply mappingFunc to childNode value
+      var child = this.children[i];
+      // have result children equal mappingFunc child.value
+      child.value = mappingFunc(child.value);
+    }
+   }
+
+    return result;
+
+
+
+}
+
+// create addChild function
+Tree.prototype.addChild = function(value) {
+  // create a child node with input value
+  var childNode = new Tree(value);
+  // push childNode to rootNode array
+  this.children.push(childNode);
+}
+
 
 

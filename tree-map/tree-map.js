@@ -34,7 +34,6 @@ var Tree = function(value) {
 };
 
 //First need to add addChild method
-
 Tree.prototype.addChild = function(value) {
   //Instantiate new tree and set to child
   child = new Tree();
@@ -42,6 +41,16 @@ Tree.prototype.addChild = function(value) {
   child.value = value;
   //Push child to existing tree children array
   this.children.push(child);
+}
+
+Tree.prototype.map = function(cb) {
+  //instantiate new Tree
+  var newTree = new Tree();
+  //perform cb function on current node and set to newTree val
+  newTree.value = cb(this.value);
+  //recurse through old tree children
+
+
 }
 
 

@@ -52,7 +52,6 @@ Tree.prototype.map = function(mappingFunction) {
 
     //need some way of traversing into the tree while also making new branches
     //not sure exactly how to do it
-
     for(var i = 0; i < tree.children.length; i++) {
       ; //must add new branch for tree if children exist
 
@@ -74,8 +73,8 @@ Tree.prototype.map = function(mappingFunction) {
 
 Tree.prototype.addChild = function(numberOfBranches) {
   for(var i = 0; i < numberOfBranches; i++) {
-    var currentBranch = new Tree(Math.floor(Math.random() * 10));
-    currentBranch.parent = this;
+    var currentBranch = new Tree(Math.floor(Math.random() * 10));  //created addChild
+    currentBranch.parent = this; //associate with the corresponding parent
     this.children.push(currentBranch);
   }
 }

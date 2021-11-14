@@ -31,6 +31,39 @@
 var Tree = function(value) {
   this.value = value;
   this.children = [];
+  this.parent = null;
+};
+
+Tree.prototype.addChild = function (value) {
+  var child = new Tree(value);
+  child.parent = this;
+  this.children.push(child);
+};
+
+Tree.prototype.map = function (cb) {
+
+  if (this.children.length === 0) {
+    var newTree = new Tree();
+    newTree.value = cb(this.value);
+    return newTree
+  }
+
+  if (this.children.length > 0) {
+    if (!this.parent) {
+      var newTree = new Tree();
+      newTree.value = cb(this.value);
+    }
+    for (var i = 0; i < this.children.length; i++) {
+      var child = this.children[i];
+      var newChildValue = cb(child.value);
+      newTree.addChild(newChildValue);
+      child.map(cb);
+      // recursive call
+     // newTree.children[0].addChild(child.map(cb));
+    }
+  }
+
+  return newTree;
 };
 
 

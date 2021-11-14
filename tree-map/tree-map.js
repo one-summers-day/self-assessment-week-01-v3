@@ -35,14 +35,23 @@ var Tree = function(value) {
 // pseudoclassical uses .prototype & new
 
 // needs to add children put into tree function
+Tree.prototype.addChild = function(value) {
+  this.children.push(Tree(value))
+}
   //take in value
   //push into children array
 
 //function for map
+Tree.prototype.map = function(func) {
+  new Tree(func(this.value))
+  var setVal = function (val, func) {
+  val.value = func(this.value)
+  for (var x = 0; x < val.children.length; x++) {
+    var child = val.children[x];
+    setVal(child, func)
+  };
+  setVal(this.children, func)
+} // how do I determine context between the two
   //takes in function that takes in value
   //creates a new tree that has its input vals modified via function
   // use funct similar to contains?
-
-
-
-

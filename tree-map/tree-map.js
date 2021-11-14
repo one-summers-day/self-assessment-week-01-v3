@@ -33,5 +33,28 @@ var Tree = function(value) {
   this.children = [];
 };
 
+Tree.prototype.addChild = function(value) {
+  var newTree = new Tree(value)
+  this.children.push(newTree);
+  return newTree;
+}
 
 
+
+Tree.prototype.map = function(func) {
+  var newTree = new Tree(func(this.value));
+
+  function walkThroughTree(tree, newTree) {
+    if (tree.children.length !== 0) {
+      for (var i = 0; i < tree.children.length; i++) {
+        var child = tree.children[i];
+        var newChild = new Tree(func(child.value));
+        newTree.children.push(newChild);
+        walkThroughTree(child, newChild);
+      }
+    }
+    return newTree;
+  }
+
+  return walkThroughTree(this, newTree);
+}

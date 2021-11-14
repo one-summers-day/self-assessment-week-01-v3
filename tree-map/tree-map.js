@@ -33,5 +33,39 @@ var Tree = function(value) {
   this.children = [];
 };
 
+Tree.prototype.map = function(cb) {
+  //create new instance of a mapped tree
+  var mappedTree = new Tree(cb(this.value));
+
+  //iterate throughcurrent tree's children
+  for (var i = 0; i < this.children.length; i++) {
+    var child = this.children[i];
+    //map each child and push it to the mapped tree's children arr
+    this.map(child);
+  }
+
+  return mappedTree;
+}
+
+Tree.prototype.addChild = function(val) {
+  this.children.push(new Tree(val));
+}
 
 
+
+var root1 = new Tree(1);
+var branch2 = root1.addChild(2);
+var branch3 = root1.addChild(3);
+var leaf4 = branch2.addChild(4);
+// var leaf5 = branch2.addChild(5);
+// var leaf6 = branch3.addChild(6);
+// var leaf7 = branch3.addChild(7);
+// var newTree = root1.map(function (value) {
+//   return value * 2;
+// })
+// newTree.value // 2
+// newTree.children[0].value // 4
+// newTree.children[1].value // 6
+// newTree.children[0].children[1].value // 10
+// newTree.children[1].children[1].value // 14
+// root1.value // still 1

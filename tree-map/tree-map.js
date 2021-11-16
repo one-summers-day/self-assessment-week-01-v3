@@ -10,22 +10,22 @@
   * but it should NOT modify the tree that was passed in.
   *
   * Example:
-  *   var root1 = new Tree(1);
-  *   var branch2 = root1.addChild(2);
-  *   var branch3 = root1.addChild(3);
-  *   var leaf4 = branch2.addChild(4);
-  *   var leaf5 = branch2.addChild(5);
-  *   var leaf6 = branch3.addChild(6);
-  *   var leaf7 = branch3.addChild(7);
-  *   var newTree = root1.map(function (value) {
-  *     return value * 2;
-  *   })
-  *  newTree.value // 2
-  *  newTree.children[0].value // 4
-  *  newTree.children[1].value // 6
-  *  newTree.children[0].children[1].value // 10
-  *  newTree.children[1].children[1].value // 14
-  *  root1.value // still 1
+  var root1 = new Tree(1);
+  var branch2 = root1.addChild(2);
+  var branch3 = root1.addChild(3);
+  var leaf4 = branch2.addChild(4);
+  var leaf5 = branch2.addChild(5);
+  var leaf6 = branch3.addChild(6);
+  var leaf7 = branch3.addChild(7);
+  var newTree = root1.map(function (value) {
+    return value * 2;
+  })
+  newTree.value // 2
+  newTree.children[0].value // 4
+  newTree.children[1].value // 6
+  newTree.children[0].children[1].value // 10
+  newTree.children[1].children[1].value // 14
+  root1.value // still 1
   */
 
 //Step 1:
@@ -57,14 +57,14 @@ Tree.prototype.addChild = function(value) {
 //Step 3:
 Tree.prototype.map = function(myAwesomeFunction) {
   //Step 3.1: Instantiate a new tree that's identical to the one we have
-  let myAwesomeReturnValue = new Tree(0);
-  myAwesomeReturnValue.value = this.value;
+  let myAwesomeReturnValue = new Tree(this.value);
   myAwesomeReturnValue.children = this.children;
   myAwesomeReturnValue.family = this.family;
 
   //Step 3.2: Use some recursion to run myAwesomeFunction through all of the children and all of the family.
   function revengeOftheRecursion(treeElement) {
     if (treeElement.children !== []){
+      treeElement.value = myAwesomeFunction(treeElement.value);
       for (let i = 0; i < treeElement.children.length; i++) {
         revengeOftheRecursion(treeElement.children[i])
       }
@@ -73,7 +73,9 @@ Tree.prototype.map = function(myAwesomeFunction) {
       treeElement.value = myAwesomeFunction(treeElement.value);
     }
   }
-  return myAwesomeReturnValue.children[0];
+
+  revengeOftheRecursion(myAwesomeReturnValue)
+  return myAwesomeReturnValue;
 }
 
-let myTree = new Tree(1);
+
